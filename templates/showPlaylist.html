@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<h2>{{playlist.name}} playlist songs for {{user.username}}</h2>
+<form method="POST" action="/user/{{user.id}}/playlist/{{playlist.id}}">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
+  'hidden'%} {% for error in field.errors %}
+  <span class="text-danger">{{ error }}</span>
+  {% endfor %}
+  <div>
+    {{ field.label.text }} {{ field(placeholder=field.description,
+    class="form-control") }}
+  </div>
+  {% endfor %}
+  <button>add song</button>
+</form>
+
+<table>
+  <tr>
+    <th>Artist</th>
+    <th>Title</th>
+    <th>Notes</th>
+  </tr>
+  {% for song in songs %}
+  <tr>
+    <td>{{song.artist}}</td>
+    <td>{{song.title}}</td>
+    <td>{{song.notes}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

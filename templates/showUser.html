@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %} {% if g.user %}
+<h2>{{user.username}}'s page, playlists below</h2>
+<form method="POST" action="/addplaylist">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
+  'hidden'%} {% for error in field.errors %}
+  <span class="text-danger">{{ error }}</span>
+  {% endfor %}
+  <div>
+    {{ field.label.text }} {{ field(placeholder=field.description,
+    class="form-control") }}
+  </div>
+  {% endfor %}
+  <button>Add Playlist</button>
+</form>
+<br />
+{% for playlist in playlists %}
+<div>
+  <li>
+    <b>{{playlist.name}}</b> description: {{playlist.description}}
+    <a href="/user/{{ g.user.id }}/playlist/{{ playlist.id }}">View</a>
+    <a href="/user/{{ g.user.id }}/playlist/{{ playlist.id }}/edit">Edit</a>
+  </li>
+</div>
+{% endfor %} {% endif %} {% endblock %}

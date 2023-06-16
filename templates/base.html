@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomePage</title>
+    <link rel="stylesheet" href="/static/style.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <a href="/"><i class="fa fa-music"> </i></a>
+    {% if g.user %}
+    <a href="/user/{{ g.user.id }}/playlists"> Welcome {{g.user.username}} </a>
+    {% endif %} {% if not g.user %}
+    <form method="GET" action="/signup">
+      <button>sign up</button>
+    </form>
+    <form method="GET" action="/login">
+      <button>log in</button>
+    </form>
+
+    {% endif %} {% block content %} {% endblock %}
+  </body>
+  {% if g.user %}
+  <div>
+    <a href="/logout">Log out</a>
+  </div>
+  {% endif %}
+</html>

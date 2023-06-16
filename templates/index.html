@@ -1,31 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    {% block content %}
-    <form method="POST" action="/getSong" id="user_form">
-      {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
-      'hidden'%} {% for error in field.errors %}
-      <span class="text-danger">{{ error }}</span>
-      {% endfor %}
-      <div>
-        {{ field.label.text }} {{ field(placeholder=field.description,
-        class="form-control") }}
-      </div>
-      {% endfor %}
-      <button>Get song</button>
-    </form>
-    <form method="GET" action="/signup">
-      <button>sign up</button>
-    </form>
-    <form method="GET" action="/login">
-      <button>log in</button>
-    </form>
-  </body>
-  {% endblock %}
-</html>
+{% extends 'base.html' %}{% block content %}
+<form method="POST" action="/artist-song" id="user_form">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
+  'hidden'%} {% for error in field.errors %}
+  <span class="text-danger">{{ error }}</span>
+  {% endfor %}
+  <div>
+    {{ field.label.text }} {{ field(placeholder=field.description,
+    class="form-control") }}
+  </div>
+  {% endfor %}
+  <button>Send Query</button>
+</form>
+<p>OR</p>
+<div>
+  <a href="/user/{{ g.user.id }}/playlist?create">Create a playlist </a>
+</div>
+{% for message in get_flashed_messages() %}
+<div class="alert alert-{{ category }}">{{ message }}</div>
+{% endfor %} {% if g.user %}
+<div><a href="/user/{{ g.user.id }}/playlists">view your playlists </a></div>
+{% endif %} {% endblock %}

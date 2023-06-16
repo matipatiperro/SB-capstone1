@@ -7,8 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-    {% block content %}
-    <form method="POST" action="/index" id="user_form">
+    <form method="POST" action="/login" id="user_form">
       {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
       'hidden'%} {% for error in field.errors %}
       <span class="text-danger">{{ error }}</span>
@@ -20,6 +19,8 @@
       {% endfor %}
       <button>Log in</button>
     </form>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
   </body>
-  {% endblock %}
 </html>

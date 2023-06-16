@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %} {% if type=="create" %}
+<form method="POST" action="/addplaylist">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
+  'hidden'%} {% for error in field.errors %}
+  <span class="text-danger">{{ error }}</span>
+  {% endfor %}
+  <div>
+    {{ field.label.text }} {{ field(placeholder=field.description,
+    class="form-control") }}
+  </div>
+  {% endfor %}
+  <button>Create Playlist</button>
+</form>
+{% endif %} {% if type=="edit" %}
+<form method="POST" action="/editplaylist/{{playlist.id}}">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
+  'hidden'%} {% for error in field.errors %}
+  <span class="text-danger">{{ error }}</span>
+  {% endfor %}
+  <div>
+    {{ field.label.text }} {{ field(placeholder=field.description,
+    class="form-control") }}
+  </div>
+  {% endfor %}
+  <button>Edit Playlist</button>
+</form>
+<form method="POST" action="/removeplaylist/{{playlist.id}}">
+  <button>Delete Playlist</button>
+</form>
+{% endif %} {% endblock %}
