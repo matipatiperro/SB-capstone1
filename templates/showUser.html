@@ -13,12 +13,16 @@
   <button>Add Playlist</button>
 </form>
 <br />
-{% for playlist in playlists %}
 <div>
-  <li>
-    <b>{{playlist.name}}</b> description: {{playlist.description}}
-    <a href="/user/{{ g.user.id }}/playlist/{{ playlist.id }}">View</a>
-    <a href="/user/{{ g.user.id }}/playlist/{{ playlist.id }}/edit">Edit</a>
-  </li>
+  {% for playlist in playlists %}
+  <div>
+    <li>
+      <b>{{playlist.name}}</b> description: {{playlist.description}}
+      <a href="/user/{{ g.user.id }}/playlist/{{ playlist.id }}">View</a>
+      <a href="/user/{{ g.user.id }}/playlist/{{ playlist.id }}/edit">Edit</a>
+    </li>
+  </div>
+
+  {% endfor %}
 </div>
-{% endfor %} {% endif %} {% endblock %}
+{% endif %} {% endblock %}

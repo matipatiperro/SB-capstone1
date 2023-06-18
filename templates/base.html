@@ -12,22 +12,24 @@
     />
   </head>
   <body>
-    <a href="/"><i class="fa fa-music"> </i></a>
-    {% if g.user %}
-    <a href="/user/{{ g.user.id }}/playlists"> Welcome {{g.user.username}} </a>
-    {% endif %} {% if not g.user %}
-    <form method="GET" action="/signup">
-      <button>sign up</button>
-    </form>
-    <form method="GET" action="/login">
-      <button>log in</button>
-    </form>
+    <div class="nav">
+      <a href="/"><i class="fa fa-music"> </i></a>
+      {% if g.user %}
+      <a href="/user/{{ g.user.id }}/playlists">
+        Welcome {{g.user.username}}
+      </a>
+      {% endif %} {% if not g.user %}
+      <form method="GET" action="/signup">
+        <button>sign up</button>
+      </form>
+      <form method="GET" action="/login">
+        <button>log in</button>
+      </form>
 
-    {% endif %} {% block content %} {% endblock %}
+      {% endif %} {% if g.user %}
+      <a class="nav-right" href="/logout">Log out</a>
+      {% endif %}
+    </div>
+    <div class="container">{% block content %} {% endblock %}</div>
   </body>
-  {% if g.user %}
-  <div>
-    <a href="/logout">Log out</a>
-  </div>
-  {% endif %}
 </html>
